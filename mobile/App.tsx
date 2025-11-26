@@ -1,12 +1,19 @@
 import "./global.css";
-import { Text, View } from "react-native";
+import { GluestackUIProvider } from "@components/ui/gluestack-ui-provider";
+import { Center } from "@/components/ui/center";
+import { Text } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function App() {
   return (
-    <View className="flex-1 items-center justify-center bg-white">
-      <Text className="text-xl font-bold text-blue-500">
-        Welcome to Nativewind!
-      </Text>
-    </View>
+    <GluestackUIProvider mode="light">
+      <SafeAreaView className="flex-1">
+        <Center className="flex-1 bg-primary-500 ">
+          <Text className="text-typography-0 font-bold">
+            This is the center.
+          </Text>
+        </Center>
+      </SafeAreaView>
+    </GluestackUIProvider>
   );
 }
