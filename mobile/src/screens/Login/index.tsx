@@ -44,8 +44,11 @@ export function Login() {
   };
 
   return (
-    <KeyboardAwareScrollView bottomOffset={100}>
-      <SafeAreaView className="flex-1 bg-background-0">
+    <KeyboardAwareScrollView
+      className="flex-1 bg-background-0"
+      bottomOffset={100}
+    >
+      <SafeAreaView className="flex-1">
         <VStack className="flex-1 ">
           <VStack className=" bg-background-50 px-12 pt-[64px] pb-[68px] rounded-b-[24px]">
             {/* Logo and Title */}
