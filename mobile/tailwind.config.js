@@ -175,7 +175,9 @@ module.exports = {
       fontWeight: {
         extrablack: "950",
       },
-      fontSize: {},
+      fontSize: {
+        "2xs": "10px",
+      },
 
       boxShadow: {
         "hard-1": "-2px 2px 8px 0px rgba(38, 38, 38, 0.20)",
