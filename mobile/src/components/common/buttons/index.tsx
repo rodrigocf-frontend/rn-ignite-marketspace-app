@@ -10,13 +10,13 @@ interface Props {
 enum ButtonVariant {
   PRIMARY = "bg-primary-0 hover:bg-primary-0 active:bg-primary-0",
   SECONDARY = "bg-secondary-100 hover:bg-secondary-100 ",
-  TERTIARY = "bg-primary-0 hover:bg-primary-0 active:bg-primary-0",
+  TERTIARY = "bg-secondary-600 hover:bg-secondary-600 active:bg-secondary-600",
 }
 
 enum ButtonTextVariant {
   PRIMARY = "text-typography-white",
   SECONDARY = "text-typography-500 hover:text-typography-500 focus:text-typography-500 active:text-typography-50",
-  TERTIARY = "bg-primary-0 hover:bg-primary-0 active:bg-primary-0",
+  TERTIARY = "text-typography-white hover:text-typography-white active:text-typography-white",
 }
 
 export const ContainedButton = ({
