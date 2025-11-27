@@ -11,7 +11,7 @@ export function TextField({ InputSlot, ...props }: Props) {
   return (
     <Input
       variant="outline"
-      className="bg-background-0 border-background-0 rounded-md py-3 px-4 h-fit"
+      className="bg-background-0 border-background-0 rounded-md py-3 pl-4 pr-3 h-fit"
     >
       <InputField
         {...props}
