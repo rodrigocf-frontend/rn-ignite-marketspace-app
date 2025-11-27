@@ -1,0 +1,281 @@
+import React, { useState } from "react";
+import { useForm, Controller } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Box } from "@/components/ui/box";
+import { Text } from "@/components/ui/text";
+import { Center } from "@/components/ui/center";
+import { VStack } from "@/components/ui/vstack";
+
+import { Heading } from "@/components/ui/heading";
+import { Pressable } from "react-native";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import {
+  FormControl,
+  FormControlError,
+  FormControlErrorText,
+} from "@/components/ui/form-control";
+import { InputIcon, InputSlot } from "@/components/ui/input";
+import { TextField } from "@/components/common/inputs/TextField";
+import { ContainedButton } from "@/components/common/buttons";
+import {
+  EyeIcon,
+  EyeSlashIcon,
+  PencilSimpleLineIcon,
+  UserIcon,
+} from "phosphor-react-native";
+import { Brand } from "@/components/common/brand";
+
+// Schema de validação com Yup
+const signUpSchema = yup.object().shape({
+  name: yup
+    .string()
+    .required("Nome é obrigatório")
+    .min(3, "Nome deve ter no mínimo 3 caracteres"),
+  email: yup.string().email("E-mail inválido").required("E-mail é obrigatório"),
+  phone: yup
+    .string()
+    .required("Telefone é obrigatório")
+    .matches(/^[0-9]{10,11}$/, "Telefone inválido"),
+  password: yup
+    .string()
+    .min(6, "Senha deve ter no mínimo 6 caracteres")
+    .required("Senha é obrigatória"),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref("password")], "As senhas não coincidem")
+    .required("Confirmação de senha é obrigatória"),
+});
+
+export function SignUp() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [avatarUri, setAvatarUri] = useState(null);
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(signUpSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      password: "",
+      confirmPassword: "",
+    },
+  });
+
+  const onSubmit = (data) => {
+    console.log("Form Data:", data);
+    alert(`Conta criada para: ${data.name}`);
+  };
+
+  const handleGoToLogin = () => {
+    console.log("Ir para o login");
+  };
+
+  const handleSelectAvatar = () => {
+    console.log("Selecionar foto do avatar");
+    // Aqui você implementaria a seleção de imagem
+  };
+
+  return (
+    <Box className="flex-1 bg-secondary-50">
+      {/* Main Content - Scrollable */}
+      <Center className="flex-1 px-6">
+        <VStack className="w-full max-w-sm py-6 ">
+          {/* Logo and Title */}
+          <VStack className="items-center mb-4 gap-3">
+            <Box>
+              <Brand width={60} height={40} />
+            </Box>
+
+            <VStack className="items-center gap-2">
+              <Heading className="text-xl text-typography-600">
+                Boas vindas!
+              </Heading>
+              <Box className="px-8">
+                <Text className="text-sm text-center font-karla text-typography-500">
+                  Crie sua conta e use o espaço para comprar itens variados e
+                  vender seus produtos
+                </Text>
+              </Box>
+            </VStack>
+          </VStack>
+
+          {/* Avatar Upload */}
+          <Center className="mb-4 mt-8">
+            <Pressable onPress={handleSelectAvatar}>
+              <Box className="relative">
+                <Avatar
+                  size="xl"
+                  className=" bg-secondary-50 border-4 border-primary-0"
+                >
+                  {avatarUri ? (
+                    <AvatarImage source={{ uri: avatarUri }} />
+                  ) : (
+                    <UserIcon size={48} color="#9F9BA1" weight="bold" />
+                  )}
+                </Avatar>
+                <Box className="absolute bg-primary-0 bottom-0 right-0 w-10 h-10 rounded-full items-center justify-center ">
+                  <PencilSimpleLineIcon size={16} color="#EDECEE" />
+                </Box>
+              </Box>
+            </Pressable>
+          </Center>
+
+          {/* Form */}
+          <VStack className="w-full gap-4">
+            {/* Name Input */}
+            <FormControl isInvalid={!!errors.name}>
+              <Controller
+                control={control}
+                name="name"
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextField
+                    placeholder="Nome"
+                    value={value}
+                    onChangeText={onChange}
+                    onBlur={onBlur}
+                  />
+                )}
+              />
+              <FormControlError>
+                <FormControlErrorText className="text-red-600 text-xs mt-1">
+                  {errors.name?.message}
+                </FormControlErrorText>
+              </FormControlError>
+            </FormControl>
+
+            {/* Email Input */}
+            <FormControl isInvalid={!!errors.email}>
+              <Controller
+                control={control}
+                name="email"
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextField
+                    placeholder="Email"
+                    value={value}
+                    onChangeText={onChange}
+                    onBlur={onBlur}
+                  />
+                )}
+              />
+              <FormControlError>
+                <FormControlErrorText className="text-red-600 text-xs mt-1">
+                  {errors.email?.message}
+                </FormControlErrorText>
+              </FormControlError>
+            </FormControl>
+
+            {/* Phone Input */}
+            <FormControl isInvalid={!!errors.phone}>
+              <Controller
+                control={control}
+                name="phone"
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextField
+                    placeholder="Telefone"
+                    value={value}
+                    onChangeText={onChange}
+                    onBlur={onBlur}
+                  />
+                )}
+              />
+              <FormControlError>
+                <FormControlErrorText className="text-red-600 text-xs mt-1">
+                  {errors.phone?.message}
+                </FormControlErrorText>
+              </FormControlError>
+            </FormControl>
+
+            {/* Password Input */}
+            <FormControl isInvalid={!!errors.password}>
+              <Controller
+                control={control}
+                name="password"
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextField
+                    placeholder="Senha"
+                    value={value}
+                    onChangeText={onChange}
+                    onBlur={onBlur}
+                    secureTextEntry={!showPassword}
+                    InputSlot={
+                      <InputSlot
+                        className="pr-3"
+                        onPress={() => setShowPassword(!showPassword)}
+                      >
+                        <InputIcon
+                          as={showPassword ? EyeIcon : EyeSlashIcon}
+                          className="text-gray-500"
+                        />
+                      </InputSlot>
+                    }
+                  />
+                )}
+              />
+              <FormControlError>
+                <FormControlErrorText className="text-red-600 text-xs mt-1">
+                  {errors.password?.message}
+                </FormControlErrorText>
+              </FormControlError>
+            </FormControl>
+
+            {/* Confirm Password Input */}
+            <FormControl isInvalid={!!errors.confirmPassword}>
+              <Controller
+                control={control}
+                name="confirmPassword"
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextField
+                    placeholder="Confirmar senha"
+                    value={value}
+                    onChangeText={onChange}
+                    onBlur={onBlur}
+                    secureTextEntry={!showConfirmPassword}
+                    InputSlot={
+                      <InputSlot
+                        className="pr-3"
+                        onPress={() =>
+                          setShowConfirmPassword(!showConfirmPassword)
+                        }
+                      >
+                        <InputIcon
+                          as={showConfirmPassword ? EyeIcon : EyeSlashIcon}
+                          className="text-gray-500"
+                        />
+                      </InputSlot>
+                    }
+                  />
+                )}
+              />
+              <FormControlError>
+                <FormControlErrorText className="text-red-600 text-xs mt-1">
+                  {errors.confirmPassword?.message}
+                </FormControlErrorText>
+              </FormControlError>
+            </FormControl>
+
+            {/* Create Account Button */}
+            <Box className="mt-6">
+              <ContainedButton variant="TERTIARY">Criar</ContainedButton>
+            </Box>
+          </VStack>
+
+          {/* Go to Login */}
+          <VStack className="items-center gap-4 mt-12">
+            <Text className="text-sm text-center font-karla text-typography-500">
+              Já tem uma conta?
+            </Text>
+            <ContainedButton variant="SECONDARY">
+              Ir para o login
+            </ContainedButton>
+          </VStack>
+        </VStack>
+      </Center>
+    </Box>
+  );
+}
