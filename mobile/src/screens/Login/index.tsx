@@ -20,6 +20,7 @@ import { BrandWithTitle } from "@/components/common/brand";
 import { loginSchema } from "@/schemas/loginSchema";
 import { EyeIcon, EyeSlashIcon } from "phosphor-react-native";
 import { Heading } from "@/components/ui/heading";
+import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 
 export function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -43,101 +44,105 @@ export function Login() {
   };
 
   return (
-    <SafeAreaView className="flex-1">
-      <VStack className="flex-1 bg-background-0">
-        <VStack className=" bg-background-50 px-12 pt-[64px] pb-[68px] rounded-b-[24px]">
-          {/* Logo and Title */}
+    <KeyboardAwareScrollView bottomOffset={100}>
+      <SafeAreaView className="flex-1 bg-background-0">
+        <VStack className="flex-1 ">
+          <VStack className=" bg-background-50 px-12 pt-[64px] pb-[68px] rounded-b-[24px]">
+            {/* Logo and Title */}
 
-          <Center>
-            <BrandWithTitle />
-            <VStack className="items-center gap-2">
-              <Box className="px-8">
-                <Text className="text-sm text-center font-karla text-typography-500">
-                  Seu espaço de compra e venda
-                </Text>
-              </Box>
+            <Center>
+              <BrandWithTitle />
+              <VStack className="items-center gap-2">
+                <Box className="px-8">
+                  <Text className="text-sm text-center font-karla text-typography-500">
+                    Seu espaço de compra e venda
+                  </Text>
+                </Box>
+              </VStack>
+            </Center>
+
+            {/* Form */}
+            <VStack className="w-full gap-4 mt-[76.76px]">
+              <Text className="text-center text-sm font-karla text-typography-500 ">
+                Acesse sua conta
+              </Text>
+
+              {/* Email Input */}
+              <FormControl isInvalid={!!errors.email}>
+                <Controller
+                  control={control}
+                  name="email"
+                  render={({ field: { onChange, onBlur, value } }) => (
+                    <TextField
+                      placeholder="E-mail"
+                      value={value}
+                      onChangeText={onChange}
+                      onBlur={onBlur}
+                      keyboardType="email-address"
+                      autoCapitalize="none"
+                      className="placeholder:text-typography-200 font-karla text-base"
+                    />
+                  )}
+                />
+                <FormControlError>
+                  <FormControlErrorText className="text-red-600 text-xs mt-1">
+                    {errors.email?.message}
+                  </FormControlErrorText>
+                </FormControlError>
+              </FormControl>
+
+              {/* Password Input */}
+              <FormControl isInvalid={!!errors.password}>
+                <Controller
+                  control={control}
+                  name="password"
+                  render={({ field: { onChange, onBlur, value } }) => (
+                    <TextField
+                      placeholder="Senha"
+                      value={value}
+                      onChangeText={onChange}
+                      onBlur={onBlur}
+                      secureTextEntry={!showPassword}
+                      InputSlot={
+                        <InputSlot
+                          className="pr-3"
+                          onPress={() => setShowPassword(!showPassword)}
+                        >
+                          {showPassword ? (
+                            <EyeIcon size={20} color="#5F5B62" />
+                          ) : (
+                            <EyeSlashIcon size={20} color="#5F5B62" />
+                          )}
+                        </InputSlot>
+                      }
+                    />
+                  )}
+                />
+                <FormControlError>
+                  <FormControlErrorText className="text-red-600 text-xs mt-1">
+                    {errors.password?.message}
+                  </FormControlErrorText>
+                </FormControlError>
+              </FormControl>
+
+              {/* Login Button */}
             </VStack>
-          </Center>
-
-          {/* Form */}
-          <VStack className="w-full gap-4 mt-[76.76px]">
-            <Text className="text-center text-sm font-karla text-typography-500 ">
-              Acesse sua conta
-            </Text>
-
-            {/* Email Input */}
-            <FormControl isInvalid={!!errors.email}>
-              <Controller
-                control={control}
-                name="email"
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <TextField
-                    placeholder="E-mail"
-                    value={value}
-                    onChangeText={onChange}
-                    onBlur={onBlur}
-                    keyboardType="email-address"
-                    autoCapitalize="none"
-                    className="placeholder:text-typography-200 font-karla text-base"
-                  />
-                )}
-              />
-              <FormControlError>
-                <FormControlErrorText className="text-red-600 text-xs mt-1">
-                  {errors.email?.message}
-                </FormControlErrorText>
-              </FormControlError>
-            </FormControl>
-
-            {/* Password Input */}
-            <FormControl isInvalid={!!errors.password}>
-              <Controller
-                control={control}
-                name="password"
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <TextField
-                    placeholder="Senha"
-                    value={value}
-                    onChangeText={onChange}
-                    onBlur={onBlur}
-                    secureTextEntry={!showPassword}
-                    InputSlot={
-                      <InputSlot
-                        className="pr-3"
-                        onPress={() => setShowPassword(!showPassword)}
-                      >
-                        {showPassword ? (
-                          <EyeIcon size={20} color="#5F5B62" />
-                        ) : (
-                          <EyeSlashIcon size={20} color="#5F5B62" />
-                        )}
-                      </InputSlot>
-                    }
-                  />
-                )}
-              />
-              <FormControlError>
-                <FormControlErrorText className="text-red-600 text-xs mt-1">
-                  {errors.password?.message}
-                </FormControlErrorText>
-              </FormControlError>
-            </FormControl>
-
-            {/* Login Button */}
+            <Box className="mt-9">
+              <ContainedButton onPress={() => {}}>Entrar</ContainedButton>
+            </Box>
           </VStack>
-          <Box className="mt-9">
-            <ContainedButton onPress={() => {}}>Entrar</ContainedButton>
+          <Box className=" mt-14 ">
+            <Text className="text-sm text-center font-karla text-typography-500 ">
+              Ainda não tem acesso?
+            </Text>
           </Box>
+          <HStack className="items-center px-12 mt-4 h-[42px">
+            <ContainedButton variant="SECONDARY">
+              Criar uma conta
+            </ContainedButton>
+          </HStack>
         </VStack>
-        <Box className=" mt-14 ">
-          <Text className="text-sm text-center font-karla text-typography-500 ">
-            Ainda não tem acesso?
-          </Text>
-        </Box>
-        <HStack className="items-center px-12 mt-4 h-[42px">
-          <ContainedButton variant="SECONDARY">Criar uma conta</ContainedButton>
-        </HStack>
-      </VStack>
-    </SafeAreaView>
+      </SafeAreaView>
+    </KeyboardAwareScrollView>
   );
 }
