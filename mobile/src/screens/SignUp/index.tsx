@@ -1,18 +1,12 @@
 import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Box } from "@/components/ui/box";
 import { Text } from "@/components/ui/text";
 import { Center } from "@/components/ui/center";
 import { VStack } from "@/components/ui/vstack";
 import { Heading } from "@/components/ui/heading";
-import {
-  KeyboardAvoidingView,
-  Platform,
-  Pressable,
-  ScrollView,
-} from "react-native";
+import { Pressable } from "react-native";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import {
   FormControl,
@@ -30,31 +24,8 @@ import {
 } from "phosphor-react-native";
 import { Brand } from "@/components/common/brand";
 import { SafeAreaView } from "react-native-safe-area-context";
-import {
-  KeyboardAwareScrollView,
-  KeyboardToolbar,
-} from "react-native-keyboard-controller";
-
-// Schema de validação com Yup
-const signUpSchema = yup.object().shape({
-  name: yup
-    .string()
-    .required("Nome é obrigatório")
-    .min(3, "Nome deve ter no mínimo 3 caracteres"),
-  email: yup.string().email("E-mail inválido").required("E-mail é obrigatório"),
-  phone: yup
-    .string()
-    .required("Telefone é obrigatório")
-    .matches(/^[0-9]{10,11}$/, "Telefone inválido"),
-  password: yup
-    .string()
-    .min(6, "Senha deve ter no mínimo 6 caracteres")
-    .required("Senha é obrigatória"),
-  confirmPassword: yup
-    .string()
-    .oneOf([yup.ref("password")], "As senhas não coincidem")
-    .required("Confirmação de senha é obrigatória"),
-});
+import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
+import { signUpSchema } from "@/schemas/signupSchema";
 
 export function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
@@ -92,8 +63,11 @@ export function SignUp() {
 
   return (
     <>
-      <KeyboardAwareScrollView bottomOffset={100}>
-        <SafeAreaView className="flex-1 bg-secondary-50">
+      <KeyboardAwareScrollView
+        className="flex-1 bg-secondary-50"
+        bottomOffset={100}
+      >
+        <SafeAreaView className="flex-1 ">
           <Box className="flex-1 ">
             {/* Main Content - Scrollable */}
             <Center className="px-6">
