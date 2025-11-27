@@ -1,14 +1,16 @@
 import { Button, ButtonText } from "@/components/ui/button";
+import { Icon } from "phosphor-react-native";
 import { PropsWithChildren } from "react";
 import { GestureResponderEvent } from "react-native";
 
 interface Props {
   onPress?: ((event: GestureResponderEvent) => void) | null | undefined;
   variant?: keyof typeof ButtonVariant;
+  IconButton?: Icon;
 }
 
 enum ButtonVariant {
-  PRIMARY = "bg-primary-0 hover:bg-primary-0 active:bg-primary-0",
+  PRIMARY = "bg-primary-0 hover:bg-primary-0 active:bg-primary-0 ",
   SECONDARY = "bg-secondary-100 hover:bg-secondary-100 ",
   TERTIARY = "bg-secondary-600 hover:bg-secondary-600 active:bg-secondary-600",
 }
@@ -23,6 +25,7 @@ export const ContainedButton = ({
   onPress,
   children,
   variant = "PRIMARY",
+  IconButton,
 }: PropsWithChildren<Props>) => {
   return (
     <Button
@@ -33,6 +36,7 @@ export const ContainedButton = ({
       }
       onPress={onPress}
     >
+      {IconButton && <IconButton size={16} color="white" weight="bold" />}
       <ButtonText
         variant="outline"
         className={
