@@ -12,8 +12,8 @@ export const config = {
     "--color-secondary-400": "95 91 98",
     "--color-secondary-300": "220 219 219",
     "--color-secondary-200": "159 155 161",
-    "--color-secondary-100": "237 236 238",
-    "--color-secondary-50": "208 208 209",
+    "--color-secondary-100": "217 216 218",
+    "--color-secondary-50": "237 236 238",
     "--color-secondary-0": "247 247 248",
 
     /* Tertiary */
@@ -92,8 +92,8 @@ export const config = {
     "--color-typography-400": "95 91 98",
     "--color-typography-300": "220 219 219",
     "--color-typography-200": "159 155 161",
-    "--color-typography-100": "237 236 238",
-    "--color-typography-50": "208 208 209",
+    "--color-typography-100": "217 216 218",
+    "--color-typography-50": "237 236 238",
     "--color-typography-0": "247 247 248",
 
     /* Outline */
@@ -116,8 +116,8 @@ export const config = {
     "--color-background-400": "95 91 98",
     "--color-background-300": "220 219 219",
     "--color-background-200": "159 155 161",
-    "--color-background-100": "237 236 238",
-    "--color-background-50": "208 208 209",
+    "--color-background-100": "217 216 218",
+    "--color-background-50": "237 236 238",
     "--color-background-0": "247 247 248",
 
     /* Background Special */
@@ -142,8 +142,8 @@ export const config = {
     "--color-secondary-400": "95 91 98",
     "--color-secondary-300": "220 219 219",
     "--color-secondary-200": "159 155 161",
-    "--color-secondary-100": "237 236 238",
-    "--color-secondary-50": "208 208 209",
+    "--color-secondary-100": "217 216 218",
+    "--color-secondary-50": "237 236 238",
     "--color-secondary-0": "247 247 248",
 
     /* Tertiary */
@@ -222,8 +222,8 @@ export const config = {
     "--color-typography-400": "95 91 98",
     "--color-typography-300": "220 219 219",
     "--color-typography-200": "159 155 161",
-    "--color-typography-100": "237 236 238",
-    "--color-typography-50": "208 208 209",
+    "--color-typography-100": "217 216 218",
+    "--color-typography-50": "237 236 238",
     "--color-typography-0": "247 247 248",
 
     /* Outline */
@@ -246,8 +246,8 @@ export const config = {
     "--color-background-400": "95 91 98",
     "--color-background-300": "220 219 219",
     "--color-background-200": "159 155 161",
-    "--color-background-100": "237 236 238",
-    "--color-background-50": "208 208 209",
+    "--color-background-100": "217 216 218",
+    "--color-background-50": "237 236 238",
     "--color-background-0": "247 247 248",
 
     /* Background Special */
