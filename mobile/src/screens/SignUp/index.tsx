@@ -208,10 +208,11 @@ export function SignUp() {
                         className="pr-3"
                         onPress={() => setShowPassword(!showPassword)}
                       >
-                        <InputIcon
-                          as={showPassword ? EyeIcon : EyeSlashIcon}
-                          className="text-gray-500"
-                        />
+                        {showPassword ? (
+                          <EyeIcon size={20} color="#5F5B62" />
+                        ) : (
+                          <EyeSlashIcon size={20} color="#5F5B62" />
+                        )}
                       </InputSlot>
                     }
                   />
@@ -243,10 +244,11 @@ export function SignUp() {
                           setShowConfirmPassword(!showConfirmPassword)
                         }
                       >
-                        <InputIcon
-                          as={showConfirmPassword ? EyeIcon : EyeSlashIcon}
-                          className="text-gray-500"
-                        />
+                        {showConfirmPassword ? (
+                          <EyeIcon size={20} color="#5F5B62" />
+                        ) : (
+                          <EyeSlashIcon size={20} color="#5F5B62" />
+                        )}
                       </InputSlot>
                     }
                   />

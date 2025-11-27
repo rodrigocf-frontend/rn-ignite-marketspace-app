@@ -10,15 +10,16 @@ import {
   FormControlError,
   FormControlErrorText,
 } from "@/components/ui/form-control";
-import { InputIcon, InputSlot } from "@/components/ui/input";
-import { EyeIcon, EyeOffIcon, Icon, MailIcon } from "@/components/ui/icon";
+import { InputSlot } from "@/components/ui/input";
 import { Controller, useForm } from "react-hook-form";
 import { ContainedButton } from "@/components/common/buttons";
 import { HStack } from "@/components/ui/hstack";
 import { TextField } from "@/components/common/inputs/TextField";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Brand } from "@/components/common/brand";
+import { BrandWithTitle } from "@/components/common/brand";
 import { loginSchema } from "@/schemas/loginSchema";
+import { EyeIcon, EyeSlashIcon } from "phosphor-react-native";
+import { Heading } from "@/components/ui/heading";
 
 export function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -44,11 +45,18 @@ export function Login() {
   return (
     <SafeAreaView className="flex-1">
       <VStack className="flex-1 bg-background-0">
-        <VStack className=" bg-background-100 px-12 pt-[64px] pb-[68px] rounded-b-[24px]">
+        <VStack className=" bg-background-50 px-12 pt-[64px] pb-[68px] rounded-b-[24px]">
           {/* Logo and Title */}
 
           <Center>
-            <Brand />
+            <BrandWithTitle />
+            <VStack className="items-center gap-2">
+              <Box className="px-8">
+                <Text className="text-sm text-center font-karla text-typography-500">
+                  Seu espaço de compra e venda
+                </Text>
+              </Box>
+            </VStack>
           </Center>
 
           {/* Form */}
@@ -98,10 +106,11 @@ export function Login() {
                         className="pr-3"
                         onPress={() => setShowPassword(!showPassword)}
                       >
-                        <InputIcon
-                          as={showPassword ? EyeIcon : EyeOffIcon}
-                          className="text-gray-500"
-                        />
+                        {showPassword ? (
+                          <EyeIcon size={20} color="#5F5B62" />
+                        ) : (
+                          <EyeSlashIcon size={20} color="#5F5B62" />
+                        )}
                       </InputSlot>
                     }
                   />
