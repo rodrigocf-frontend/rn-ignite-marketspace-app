@@ -1,4 +1,5 @@
 import { Button, ButtonText } from "@/components/ui/button";
+import { VStack } from "@/components/ui/vstack";
 import { Icon } from "phosphor-react-native";
 import { PropsWithChildren } from "react";
 import { GestureResponderEvent } from "react-native";
@@ -28,23 +29,25 @@ export const ContainedButton = ({
   IconButton,
 }: PropsWithChildren<Props>) => {
   return (
-    <Button
-      variant="solid"
-      className={
-        "items-center justify-center py-4 rounded-md  w-full  h-fit " +
-        ButtonVariant[variant]
-      }
-      onPress={onPress}
-    >
-      {IconButton && <IconButton size={16} color="white" weight="bold" />}
-      <ButtonText
-        variant="outline"
+    <VStack className="flex-1">
+      <Button
+        variant="solid"
         className={
-          "font-karla_bold text-sm text-center " + ButtonTextVariant[variant]
+          "items-center justify-center py-4 rounded-md  h-fit " +
+          ButtonVariant[variant]
         }
+        onPress={onPress}
       >
-        {children}
-      </ButtonText>
-    </Button>
+        {IconButton && <IconButton size={16} color="white" weight="bold" />}
+        <ButtonText
+          variant="outline"
+          className={
+            "font-karla_bold text-sm text-center " + ButtonTextVariant[variant]
+          }
+        >
+          {children}
+        </ButtonText>
+      </Button>
+    </VStack>
   );
 };

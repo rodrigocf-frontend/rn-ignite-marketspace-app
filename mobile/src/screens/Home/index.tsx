@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ScrollView, Pressable, Image } from "react-native";
+import { ScrollView, Pressable, Image, Keyboard } from "react-native";
 import { Box } from "@/components/ui/box";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
@@ -19,6 +19,7 @@ import { AdvertisementInfo } from "@/components/features/AdvertisementInfo";
 import { TextField } from "@/components/common/inputs/TextField";
 import { Divider } from "@/components/ui/divider";
 import { AdvertisementCard } from "@/components/features/AdvertisementCard";
+import { FilterModal } from "@/components/features/FilterModal";
 
 // Dados mock dos produtos
 const products = [
@@ -74,6 +75,7 @@ const products = [
 
 export function Home() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [visibleFilter, setVisibleFilter] = useState(false);
 
   const handleCreateAd = () => {
     console.log("Criar anúncio");
@@ -87,80 +89,94 @@ export function Home() {
     console.log("Produto selecionado:", productId);
   };
 
+  const handleOpenFilter = () => setVisibleFilter(true);
+
+  const handleCloseFilter = () => setVisibleFilter(false);
+
   return (
-    <SafeAreaView className="flex-1 bg-secondary-50">
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {/* Header */}
-        <HomeHeader />
+    <>
+      <SafeAreaView className="flex-1 bg-secondary-50">
+        <ScrollView showsVerticalScrollIndicator={false}>
+          {/* Header */}
+          <HomeHeader />
 
-        {/* My Ads Card */}
-        <Box className=" max-w-sm w-full m-auto mt-8">
-          <Text className="text-sm  font-karla text-typography-500  ">
-            Seus produtos anunciados para venda
-          </Text>
-        </Box>
-        <AdvertisementInfo />
+          {/* My Ads Card */}
+          <Box className=" max-w-sm w-full m-auto mt-8">
+            <Text className="text-sm  font-karla text-typography-500  ">
+              Seus produtos anunciados para venda
+            </Text>
+          </Box>
+          <AdvertisementInfo />
 
-        {/* Search Section */}
-        <Box className=" max-w-sm w-full m-auto mt-8">
-          <Text className="text-sm  font-karla text-typography-500  ">
-            Compre produtos variados
-          </Text>
-        </Box>
-        <Box className="max-w-sm w-full m-auto mt-3">
-          <HStack className="gap-2">
-            <Box className="flex-1">
-              <TextField
-                placeholder="Buscar anúncio"
-                value={searchQuery}
-                onChangeText={setSearchQuery}
-                className="text-typography-900"
-                InputSlot={
-                  <>
-                    <InputSlot className="pr-3">
-                      <MagnifyingGlassIcon
-                        size={20}
-                        color="#3E3A40"
-                        weight="bold"
-                      />
-                    </InputSlot>
-                    <Divider orientation="vertical" className="mx-3" />
-                    <InputSlot>
-                      <SlidersIcon size={20} color="#3E3A40" weight="bold" />
-                    </InputSlot>
-                  </>
-                }
-              />
-            </Box>
-          </HStack>
-        </Box>
-
-        {/* Products Grid */}
-        <Box className="max-w-sm w-full m-auto mt-6">
-          <VStack className="gap-6">
-            {/* Row 1 */}
-            <HStack className="gap-5">
-              {products.slice(0, 2).map((product) => (
-                <AdvertisementCard data={product} key={product.id} />
-              ))}
+          {/* Search Section */}
+          <Box className=" max-w-sm w-full m-auto mt-8">
+            <Text className="text-sm  font-karla text-typography-500  ">
+              Compre produtos variados
+            </Text>
+          </Box>
+          <Box className="max-w-sm w-full m-auto mt-3">
+            <HStack className="gap-2">
+              <Box className="flex-1">
+                <TextField
+                  placeholder="Buscar anúncio"
+                  value={searchQuery}
+                  onChangeText={setSearchQuery}
+                  className="text-typography-900"
+                  InputSlot={
+                    <>
+                      <InputSlot className="pr-3">
+                        <MagnifyingGlassIcon
+                          size={20}
+                          color="#3E3A40"
+                          weight="bold"
+                        />
+                      </InputSlot>
+                      <Divider orientation="vertical" className="mx-3" />
+                      <InputSlot
+                        onPress={handleOpenFilter}
+                        pointerEvents="box-only"
+                      >
+                        <SlidersIcon size={20} color="#3E3A40" weight="bold" />
+                      </InputSlot>
+                    </>
+                  }
+                />
+              </Box>
             </HStack>
+          </Box>
 
-            {/* Row 2 */}
-            <HStack className="gap-5">
-              {products.slice(2, 4).map((product) => (
-                <AdvertisementCard data={product} key={product.id} />
-              ))}
-            </HStack>
+          {/* Products Grid */}
+          <Box className="max-w-sm w-full m-auto mt-6">
+            <VStack className="gap-6">
+              {/* Row 1 */}
+              <HStack className="gap-5">
+                {products.slice(0, 2).map((product) => (
+                  <AdvertisementCard data={product} key={product.id} />
+                ))}
+              </HStack>
 
-            {/* Row 3 */}
-            <HStack className="gap-5">
-              {products.slice(4, 6).map((product) => (
-                <AdvertisementCard data={product} key={product.id} />
-              ))}
-            </HStack>
-          </VStack>
-        </Box>
-      </ScrollView>
-    </SafeAreaView>
+              {/* Row 2 */}
+              <HStack className="gap-5">
+                {products.slice(2, 4).map((product) => (
+                  <AdvertisementCard data={product} key={product.id} />
+                ))}
+              </HStack>
+
+              {/* Row 3 */}
+              <HStack className="gap-5">
+                {products.slice(4, 6).map((product) => (
+                  <AdvertisementCard data={product} key={product.id} />
+                ))}
+              </HStack>
+            </VStack>
+          </Box>
+        </ScrollView>
+      </SafeAreaView>
+      <FilterModal
+        onClose={handleCloseFilter}
+        onApplyFilters={() => {}}
+        visible={visibleFilter}
+      />
+    </>
   );
 }
