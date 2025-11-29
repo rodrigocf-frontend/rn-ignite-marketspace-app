@@ -1,7 +1,9 @@
 import "./global.css";
 import { GluestackUIProvider } from "@/config/gluestack-ui-provider";
 import { useBootstrap } from "@/hooks/useBootstrap";
+import { Home } from "@/screens/Home";
 import { Login } from "@/screens/Login";
+import { ProductDetails } from "@/screens/ProductDetails";
 import { SignUp } from "@/screens/SignUp";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
@@ -21,7 +23,7 @@ export default function App() {
   return (
     <KeyboardProvider>
       <GluestackUIProvider mode="light">
-        <SignUp />
+        <ProductDetails />
       </GluestackUIProvider>
     </KeyboardProvider>
   );
