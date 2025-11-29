@@ -262,7 +262,7 @@ export function SignUp() {
                 </VStack>
 
                 {/* Go to Login */}
-                <VStack className="items-center gap-4 mt-12 mb-6">
+                <VStack className="gap-4 mt-12 mb-6">
                   <Text className="text-sm text-center font-karla text-typography-500">
                     Já tem uma conta?
                   </Text>

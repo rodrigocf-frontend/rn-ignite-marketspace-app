@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Box } from "@/components/ui/box";
@@ -21,6 +21,7 @@ import { loginSchema } from "@/schemas/loginSchema";
 import { EyeIcon, EyeSlashIcon } from "phosphor-react-native";
 import { Heading } from "@/components/ui/heading";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
+import { GestureResponderEvent, Keyboard } from "react-native";
 
 export function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -139,11 +140,11 @@ export function Login() {
               Ainda não tem acesso?
             </Text>
           </Box>
-          <HStack className="items-center px-12 mt-4 h-[42px">
+          <Box className=" px-12 mt-4 h-[42px] ">
             <ContainedButton variant="SECONDARY">
               Criar uma conta
             </ContainedButton>
-          </HStack>
+          </Box>
         </VStack>
       </SafeAreaView>
     </KeyboardAwareScrollView>
