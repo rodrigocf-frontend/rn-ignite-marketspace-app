@@ -1,5 +1,6 @@
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Box } from "@/components/ui/box";
+import { Heading } from "@/components/ui/heading";
 import { Image } from "@/components/ui/image";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
@@ -11,7 +12,8 @@ type Product = {
   price: string;
   image: string;
   status: string;
-  avatar: string;
+  avatar?: string;
+  isActive?: boolean;
 };
 
 interface Props {
@@ -19,11 +21,13 @@ interface Props {
 }
 
 export function AdvertisementCard({ data }: Props) {
-  const { avatar, id, image, price, status, title } = data;
+  const { avatar, id, isActive, image, price, status, title } = data;
+
+  const titleColor = isActive ? "text-typography-600" : "text-typography-400";
 
   return (
     <Pressable onPress={() => {}} className="flex-1">
-      <VStack className="gap-1">
+      <VStack>
         <Box className="relative rounded-md overflow-hidden">
           <Image
             source={{ uri: image }}
@@ -33,10 +37,25 @@ export function AdvertisementCard({ data }: Props) {
           />
           {/* Avatar */}
           <Box className="absolute top-1 left-1">
-            <Avatar size="xs" className="border border-secondary-0 w-6 h-6">
-              <AvatarImage source={{ uri: avatar }} alt="product" />
-            </Avatar>
+            {avatar && (
+              <Avatar size="xs" className="border border-secondary-0 w-6 h-6">
+                <AvatarImage source={{ uri: avatar }} alt="product" />
+              </Avatar>
+            )}
           </Box>
+
+          {!isActive && (
+            <>
+              <Box className="absolute bg-background-600 w-full h-full opacity-40" />
+              <Box className="absolute bottom-1  left-1">
+                {!isActive && (
+                  <Heading className="font-karla_bold text-[11px] text-typography-0 uppercase w-full">
+                    Anúncio desativado
+                  </Heading>
+                )}
+              </Box>
+            </>
+          )}
 
           {/* Badge */}
           <Box
@@ -50,10 +69,10 @@ export function AdvertisementCard({ data }: Props) {
           </Box>
         </Box>
 
-        <Text className="text-typography-500 font-karla text-sm mt-1">
+        <Text className={" font-karla text-sm mt-1 " + titleColor}>
           {title}
         </Text>
-        <Text className="text-typography-600 font-karla_bold text-base">
+        <Text className={"font-karla_bold text-base " + titleColor}>
           R$ {price}
         </Text>
       </VStack>

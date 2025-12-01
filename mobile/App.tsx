@@ -5,6 +5,7 @@ import { Home } from "@/screens/Home";
 import { Login } from "@/screens/Login";
 import { ProductDetails } from "@/screens/ProductDetails";
 import { SignUp } from "@/screens/SignUp";
+import { MyAnnouncements } from "@/screens/MyAnnouncements";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import { KeyboardProvider } from "react-native-keyboard-controller";
@@ -23,7 +24,7 @@ export default function App() {
   return (
     <KeyboardProvider>
       <GluestackUIProvider mode="light">
-        <ProductDetails />
+        <MyAnnouncements />
       </GluestackUIProvider>
     </KeyboardProvider>
   );
