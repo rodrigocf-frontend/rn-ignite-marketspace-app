@@ -22,6 +22,12 @@ enum ButtonTextVariant {
   TERTIARY = "text-typography-white hover:text-typography-white active:text-typography-white",
 }
 
+enum IconVariant {
+  PRIMARY = "#EDECEE",
+  SECONDARY = "#3E3A40",
+  TERTIARY = "#3E3A40",
+}
+
 export const ContainedButton = ({
   onPress,
   children,
@@ -38,7 +44,9 @@ export const ContainedButton = ({
         }
         onPress={onPress}
       >
-        {IconButton && <IconButton size={16} color="white" weight="bold" />}
+        {IconButton && (
+          <IconButton size={16} color={IconVariant[variant]} weight="bold" />
+        )}
         <ButtonText
           variant="outline"
           className={
