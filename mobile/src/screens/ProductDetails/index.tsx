@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView, Image, useWindowDimensions } from "react-native";
+import { ScrollView, Image } from "react-native";
 import { Box } from "@/components/ui/box";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
@@ -10,11 +10,7 @@ import Carousel, {
   ICarouselInstance,
   Pagination,
 } from "react-native-reanimated-carousel";
-import {
-  Extrapolation,
-  interpolate,
-  useSharedValue,
-} from "react-native-reanimated";
+import { useSharedValue } from "react-native-reanimated";
 import {
   BankIcon,
   BarcodeIcon,
@@ -30,7 +26,6 @@ const PAGE_WIDTH = 430;
 
 export function ProductDetails() {
   const progress = useSharedValue<number>(0);
-  const { height, width } = useWindowDimensions();
 
   const baseOptions = {
     vertical: false,
