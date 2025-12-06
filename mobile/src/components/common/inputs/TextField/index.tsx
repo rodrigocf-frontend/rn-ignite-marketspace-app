@@ -1,5 +1,4 @@
 import { Input, InputField, InputSlot } from "@/components/ui/input";
-import { IInputFieldProps } from "@gluestack-ui/input/lib/types";
 import { ReactNode } from "react";
 import { TextInputProps } from "react-native";
 
