@@ -29,7 +29,7 @@ export const ContainedButton = ({
   IconButton,
 }: PropsWithChildren<Props>) => {
   return (
-    <VStack>
+    <VStack className="flex-1">
       <Button
         variant="solid"
         className={
